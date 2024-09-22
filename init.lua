@@ -31,7 +31,7 @@ require("lazy").setup({
 })
 
 -- Adding the colorschemee ( if you want to change the theme just change the name e.g. default,nord,catppuccin,retrobox
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme rose-pine-moon")
 
 -- Setting the background transparent or same as the terminal
 

@@ -1,5 +1,5 @@
 --if you want to set a custom keymap just enter the vim.keymap.set followed by key combination and the action you want to perform
-vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left toggle<CR>", { silent = true })
+--vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left toggle<CR>", { silent = true })
 vim.keymap.set("n", "<leader>e", ":Neotree focus<CR>", { silent = true }) --focus neotree
 vim.keymap.set("n", "<leader>ft", vim.lsp.buf.format, { silent = true }) --format file
 vim.keymap.set("n", "<leader>r", ":Neotree reveal<CR>", { silent = true }) -- current fiel reavel neotree
@@ -13,6 +13,7 @@ vim.keymap.set("n", "<leader>fw", ":Telescope current_buffer_fuzzy_find<CR>", { 
 vim.keymap.set("n", "<leader>gc", ":Telescope git_commits<CR>", { silent = true })
 vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { silent = true })
 vim.keymap.set("n", "<leader>gs", ":Telescope git_status<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>cb", ":Telescope buffers<CR>", { silent = true })
 
 
 --vim.keymap.set("n", "<leader>gs", "::Neotree float git_status git_base=main<CR>", { silent = true })
@@ -22,7 +23,7 @@ vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
 
 -- Open a terminal in a vertical split
 vim.api.nvim_set_keymap("n", "<Leader>t", ":vsplit | terminal<CR>", { noremap = true, silent = true })
-
+vim.keymap.set('n', '<leader>sv',":vsplit<CR>", { noremap = true, silent = true })
 -- Close the current terminal window
 
 vim.api.nvim_set_keymap("t", "<Leader>q", [[<C-\><C-n>:q<CR>]], { noremap = true, silent = true })
@@ -30,4 +31,11 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true })
 vim.keymap.set({"n"}, "<Leader>ca", vim.lsp.buf.code_action, {silent = true})
 
+vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n','<C-k>', ':wincmd k<CR>')
+vim.keymap.set('n','<C-j>', ':wincmd j<CR>')
+vim.keymap.set('n','<C-h>', ':wincmd h<CR>')
+vim.keymap.set('n','<C-l>', ':wincmd l<CR>')
 
