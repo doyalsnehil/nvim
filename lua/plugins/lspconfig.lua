@@ -27,7 +27,17 @@ return {
 				capabilities = capabilities,
 			})
 
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
 
+			lspconfig.eslint.setup({
+				capabilities = capabilities,
+				on_attach = function(client, bufnr)
+					-- Additional configuration (if needed)
+					-- client.resolved_capabilities.document_formatting = false
+				end,
+			})
 
 			-- Example: lua_ls configuration
 			lspconfig.lua_ls.setup({
