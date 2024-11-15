@@ -7,7 +7,7 @@ return {
 	},
 	config = function()
 		require("startup").setup({
-			theme = "dashboard",
+			theme = "evil",
 		})
 	end,
 }
