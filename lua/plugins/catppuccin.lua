@@ -4,6 +4,7 @@ return {
   "catppuccin/nvim",
   as = "catppuccin",
   config = function()
+	  Lazy = true
     -- Catppuccin setup
     require("catppuccin").setup({
       transparent_background = true, -- Enable transparency
