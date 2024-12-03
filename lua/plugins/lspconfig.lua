@@ -44,7 +44,20 @@ return {
 				capabilities = capabilities,
 			})
 
+			local lspconfig = require("lspconfig")
 
+			-- Configure Emmet-LS
+			lspconfig.emmet_language_server.setup({
+				filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact", "vue", "svelte", "xml", "pug" }, -- Add more filetypes if needed
+				init_options = {
+					--- Emmet options can go here
+					html = {
+						options = {
+							["bem.enabled"] = true, -- Enable BEM-style abbreviations
+						},
+					},
+				},
+			})
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)

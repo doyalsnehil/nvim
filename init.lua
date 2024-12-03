@@ -34,31 +34,4 @@ require("lazy").setup({
 vim.cmd("colorscheme rose-pine-moon")
 vim.o.cmdheight=0 
 
--- Setting the background transparent or same as the terminal
-
---vim.cmd([[highlight Normal guibg=NONE ctermbg=NONE]])
---vim.cmd([[highlight NonText guibg=NONE ctermbg=NONE]])
---vim.cmd([[highlight LineNr guibg=NONE ctermbg=NONE]])
---vim.cmd([[highlight CursorLine guibg=NONE]])
---vim.cmd([[highlight SignColumn guibg=NONE]])
-
---[[]
-vim.cmd([[
-    hi NormalNC guibg=NONE ctermbg=NONE
-    hi VertSplit guibg=NONE ctermbg=NONE
-    hi EndOfBuffer guibg=NONE ctermbg=NONE
-    hi MsgArea guibg=NONE ctermbg=NONE
-    hi TelescopeNormal guibg=NONE ctermbg=NONE
-    hi TelescopeBorder guibg=NONE ctermbg=NONE
-    hi TelescopePromptBorder guibg=NONE ctermbg=NONE
-    hi TelescopeResultsBorder guibg=NONE ctermbg=NONE
-    hi TelescopePreviewBorder guibg=NONE ctermbg=NONE
-    hi NormalFloat guibg=NONE ctermbg=NONE
-    hi FloatBorder guibg=NONE ctermbg=NONE
-
-	  hi TelescopePromptNormal guibg=NONE ctermbg=NONE
-    hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
-    hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
-]]
-
 
