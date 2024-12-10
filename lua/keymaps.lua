@@ -4,7 +4,7 @@ vim.keymap.set("n", "<leader>e", ":Neotree focus<CR>", { silent = true }) --focu
 vim.keymap.set("n", "<leader>ft", vim.lsp.buf.format, { silent = true }) --format file
 vim.keymap.set("n", "<leader>r", ":Neotree reveal<CR>", { silent = true }) -- current fiel reavel neotree
 
---Telescope Commands ususally Starts with f
+--Telescope Commands 
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true })
 vim.keymap.set("n", "<leader>th", ":Telescope colorscheme<CR>", { silent = true })
 vim.keymap.set("n", "<leader>of", ":Telescope oldfiles<CR>", { silent = true }) --find old files
@@ -17,7 +17,7 @@ vim.keymap.set("n", "<Leader>cb", ":Telescope buffers<CR>", { silent = true })
 
 
 --vim.keymap.set("n", "<leader>gs", "::Neotree float git_status git_base=main<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
+--vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
 --vim.keymap.set({ "n", "t" }, "<leader>t", "<cmd>ToggleTerm direction=horizontal<CR>")
 -- Open a terminal in a horizontal split
 
@@ -31,8 +31,8 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { silent = true })
 vim.keymap.set({"n"}, "<Leader>ca", vim.lsp.buf.code_action, {silent = true})
 
-vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n','<C-k>', ':wincmd k<CR>')
 vim.keymap.set('n','<C-j>', ':wincmd j<CR>')

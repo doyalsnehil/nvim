@@ -29,7 +29,12 @@ return {
 
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
-			})
+--[[ 				on_attach = function(client, bufnr)
+					if client.server_capabilities.semanticTokensProvider then
+						client.server_capabilities.semanticTokensProvider = nil
+					end
+				end,
+	 ]]		})
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
@@ -48,7 +53,18 @@ return {
 
 			-- Configure Emmet-LS
 			lspconfig.emmet_language_server.setup({
-				filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescriptreact", "vue", "svelte", "xml", "pug" }, -- Add more filetypes if needed
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescriptreact",
+					"vue",
+					"svelte",
+					"xml",
+					"pug",
+				}, -- Add more filetypes if needed
 				init_options = {
 					--- Emmet options can go here
 					html = {
