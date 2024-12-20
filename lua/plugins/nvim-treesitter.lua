@@ -15,11 +15,7 @@ return {
 			sync_install = false,
 			highlight = { enable = true },
 			indent = { enable = true },
-			highlight_groups = {
-    ["@function"] = { fg = "#ff79c6" },  -- Adjust color as needed
-    -- Highlight method calls like console.log
-    ["@method"] = { fg = "#ff79c6" },  -- Adjust color as needed
 			}
-		})
+		)
 	end,
 }

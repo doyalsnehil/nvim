@@ -22,7 +22,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	ui = {
 		border = "double",
-
 	},
 
 	spec = {
@@ -32,6 +31,4 @@ require("lazy").setup({
 
 -- Adding the colorschemee ( if you want to change the theme just change the name e.g. default,nord,catppuccin,retrobox
 vim.cmd("colorscheme rose-pine-moon")
-vim.o.cmdheight=0 
-
-
+vim.o.cmdheight = 0

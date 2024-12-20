@@ -19,32 +19,35 @@ return {
         -- Set up DAP and DAP UI
         dapui.setup()
 
-        -- DAP adapter configuration
-        dap.adapters.codelldb = {
-            type = "server",
-            port = "${port}",
-            executable = {
-                command = "/home/snehil/.local/share/nvim/mason/bin/codelldb",
-                args = { "--port", "${port}" },
+        -- DAP adapter configuration for PWA Node
+        dap.adapters.pwa_node = {
+            type = "executable",
+            command = "node",
+            args = {
+                "/home/snehil/.local/share/nvim/mason/packages/js-debug-adapter/out/src/nodeDebug.js",  -- PWA Node Adapter path
             },
         }
 
-        -- DAP configurations for cpp, c, rust
-        dap.configurations.cpp = {
+        -- DAP configurations for JavaScript (with sourcemaps)
+        dap.configurations.javascript = {
             {
-                name = "Debug",
-                type = "codelldb",
+                type = "pwa_node",  -- Use pwa-node instead of node2
                 request = "launch",
-                program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                end,
-                cwd = "${workspaceFolder}",
-                stopOnEntry = false,
-                args = {},
+                name = "Launch File",
+                program = "${file}",
+                cwd = vim.fn.getcwd(),
+                sourceMaps = true,
+                protocol = "inspector",
+                console = "integratedTerminal",
+            },
+            {
+                type = "pwa_node",  -- Use pwa-node instead of node2
+                request = "attach",
+                name = "Attach to Process",
+                processId = require("dap.utils").pick_process,
+                cwd = vim.fn.getcwd(),
             },
         }
-        dap.configurations.c = dap.configurations.cpp
-        dap.configurations.rust = dap.configurations.cpp
 
         -- DAP UI listeners
         dap.listeners.before.attach.dapui_config = function() dapui.open() end
