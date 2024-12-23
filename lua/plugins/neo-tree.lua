@@ -16,10 +16,10 @@ return {
               -- Change type
               added     = "✚",
               deleted   = "✖",
-              modified  = "",
+              modified = "󰰑 ",
               renamed   = "󰁕",
               -- Status type
-              untracked = "★",
+              untracked = "󰦱 ",
               ignored   = "◌",
               unstaged  = "✗",
               staged    = "",
