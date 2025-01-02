@@ -1,7 +1,8 @@
 return {
 	{
 		"gelguy/wilder.nvim",
-		lazy = false,
+		lazy = true,
+		event = 'CmdlineEnter',
 		dependencies = {
 			"romgrk/fzy-lua-native", -- Optional: for fuzzy matching
 		},
