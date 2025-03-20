@@ -13,25 +13,30 @@ return {
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
+			"kristijanhusak/vim-dadbod-completion", -- 🔥 Add Dadbod Completion Here
 		},
 
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local luasnip = require("luasnip")
+
+			-- 🔹 Cmdline Completion
 			cmp.setup.cmdline("/", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
 					{ name = "buffer" },
 				},
 			})
-			-- Load friendly snippets
+
+			-- 🔹 Load Snippets
 			require("luasnip.loaders.from_vscode").lazy_load()
 
+			-- 🌍 *Global Completion Setup (For All Files)*
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 				window = {
@@ -43,24 +48,37 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item.
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
-				}, {
+					{ name = "luasnip" },
 					{ name = "buffer" },
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
-						mode = "symbol", -- show only symbol annotations
-						maxwidth = 50, -- prevent the popup from showing more than provided characters
-						ellipsis_char = "...", -- when popup menu exceeds maxwidth, show ellipsis_char
-						show_labelDetails = true, -- show labelDetails in the menu
+						mode = "symbol",
+						maxwidth = 50,
+						ellipsis_char = "...",
+						show_labelDetails = true,
 					}),
 				},
+			})
+
+			-- 🔥 *Enable Dadbod Completion ONLY for SQL Files*
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "sql", "mysql", "plsql" },
+				callback = function()
+					require("cmp").setup.buffer({
+						sources = cmp.config.sources({
+							{ name = "vim-dadbod-completion" }, -- Database Autocompletion
+							{ name = "buffer" },
+							{ name = "path" },
+						}),
+					})
+				end,
 			})
 		end,
 	},

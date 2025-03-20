@@ -17,24 +17,41 @@ return {
 
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-			-- Example: pyright configuration
-			lspconfig.pyright.setup({
-				capabilities = capabilities,
-			})
-
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
-			})
-
+			capabilities = vim.tbl_deep_extend(
+				"force",
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities()
+			)
+			capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+			-- TypeScript/JavaScript LSP Optimization
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
---[[ 				on_attach = function(client, bufnr)
-					if client.server_capabilities.semanticTokensProvider then
+				on_attach = function(client, bufnr)
+					-- Disable semantic tokens to improve speed
+					--[[ if client.server_capabilities.semanticTokensProvider then
 						client.server_capabilities.semanticTokensProvider = nil
-					end
+					end ]]
 				end,
-	 ]]		})
+				flags = {
+					debounce_text_changes = 150, -- Reduce frequent updates to improve performance
+				},
+			})
+
+			-- Disable inline hints but keep error/warning signs
+			vim.diagnostic.config({
+				virtual_text = false, -- Removes inline hints to reduce noise
+				signs = true, -- Keeps error/warning signs in the gutter
+				underline = true, -- Keeps underlines for errors
+				update_in_insert = false, -- Improves performance by not updating diagnostics while typing
+			})
+
+			-- Other LSP configurations remain untouched
+			lspconfig.clangd.setup({
+				on_attach = function(client, bufnr)
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+				end,
+			})
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
@@ -48,16 +65,34 @@ return {
 			lspconfig.marksman.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.pyright.setup({
+				capabilities = capabilities,
+				settings = {
+					pyright = {
+						disableOrganizeImports = true, -- Let Ruff handle import sorting
+					},
+					python = {
+						analysis = {
+							ignore = { "*" }, -- Ignore Pyright linting (use Ruff instead)
+						},
+					},
+				},
+			})
 
-			local lspconfig = require("lspconfig")
-
+			lspconfig.ruff.setup({
+				capabilities = capabilities,
+				filetypes = { "python" },
+				on_attach = function(client, bufnr)
+					client.server_capabilities.hoverProvider = false -- Disable Ruff hover (Pyright handles it)
+				end,
+			})
 			-- Configure Emmet-LS
+
 			lspconfig.emmet_language_server.setup({
 				filetypes = {
 					"html",
 					"css",
 					"scss",
-					"javascript",
 					"javascriptreact",
 					"typescriptreact",
 					"vue",
